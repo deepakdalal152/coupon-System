@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #navbar{
+            width: 90%;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            background-color:azure;
+            padding: 2%;
+            margin: auto;
+            
+        }
+        #outerBorder{
+            width: 50%;
+            height: 50%;
+            border: 2px red solid ;
+            margin: auto;
+            text-align: center;
+            padding: 5%;
+            margin-top: 3%;
+        }
+        input{
+            width: 70%;
+            border: 2px red solid;
+            margin: 2%;
+            font-size: larger;
+
+        }
+        button{
+            width:  30%;
+            border: 2px red solid;
+            font-size: larger;
+            margin-top: 10%;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <div id="signup">Signup</div>
+        <div id="couponAmount">Amount</div>
+        <div id="purchaseVoucher">Purchase Voucher</div>
+    </div>
+
+    <div id="outerBorder">
+        <form action="" id="form">
+            <h1>Sign Up</h1>
+            <input type="text" name="Name" id="name" placeholder="Name...">
+            <input type="text" name="Email" id="email" placeholder="Email...">
+            <input type="text" name="Adress" id="address" placeholder="Address...">
+            <input type="text" name="Amount" id="amount" placeholder="Add amount in wallet...">
+            <button id="submit" onclick="submitData()">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
+
+<script>
+
+function createPackage(name, email, address, wallet)
+{
+    this.name =  name;
+    this.email = email;
+    this.address =  address;
+    this.wallet = wallet;
+}
+
+    function submitData()
+    {
+        event.preventDefault()
+        let name =  document.getElementById('name').value;
+        let email = document.getElementById('email').value;
+        let address = document.getElementById("address").value;
+        let wallet = document.getElementById("amount").value;
+
+        let saveData = new createPackage(name, email,address,wallet)
+
+        // console.log(name, email,address,amount)
+
+        localStorage.setItem('user',JSON.stringify(saveData))
+    }
+
+</script>
