@@ -49,6 +49,10 @@
             margin:5%;
             padding-bottom: 1%;
         }
+        img{
+            width: 100%;
+            height: 100%;
+        }
 
     </style>
 </head>
@@ -66,29 +70,85 @@
             <div id="price">Price</div>
             <button id="buy">Buy</button>
         </div>
-        <div id="voucher">
-            <div id="image"><img src="" alt="">image</div>
-            <div id="name">Name</div>
-            <div id="price">Price</div>
-            <button id="buy">Buy</button>
-        </div>
-        <div id="voucher">
-            <div id="image"><img src="" alt="">image</div>
-            <div id="name">Name</div>
-            <div id="price">Price</div>
-            <button id="buy">Buy</button>
-        </div>
-        <div id="voucher">
-            <div id="image"><img src="" alt="">image</div>
-            <div id="name">Name</div>
-            <div id="price">Price</div>
-            <button id="buy">Buy</button>
-        </div>
     </div>
 </body>
 </html>
 
 <script>
+
+// setting api link---------------
+
+const apiUrl = 'https://masai-vouchers-api.herokuapp.com/api/vouchers'
+
+
+
+//  save coupon data after buy--------------
+
+function saveCoupon(saveVoucher){
+    console.log('tes')
+}
+
+// construction function for data display----------
+
+function createCard(voucher)
+{
+    this.vouchers =  document.createElement('div')
+    this.vouchers.setAttribute('id', 'voucher')
+
+
+    this.imge = document.createElement('img')
+    this.imge.setAttribute('src',voucher.image)
+
+    this.images = document.createElement('div')
+    this.images.setAttribute('id','image')
+    this.images.append(this.imge)
+
+    this.names = document.createElement('div')
+    this.names.setAttribute('id','name')
+    this.names.textContent = voucher.name;
+
+    this.prices =  document.createElement('div')
+    this.prices.setAttribute('id','price')
+    this.prices.textContent = voucher.price;
+
+    this.buttons =  document.createElement('button')
+    this.buttons.setAttribute('id','buy')
+    this.buttons.textContent = "Buy"
+    // ------------------------------------start from here--------------------------------------------------------------------------------------
+    this.buttons.addEventListener('onClick', function(){saveCoupon(voucher)})
+
+    this.vouchers.append(images,names,prices, buttons)
+
+    document.getElementById('outerBorder').append(vouchers)
+
+}
+
+
+// sending data for display-------
+
+let appendData = (data) =>{
+    data.forEach(({vouchers})=>{
+        
+        // creating card----
+        vouchers.forEach((el)=>{
+            console.log(el)
+            createCard(el)
+        })
+        // console.log(vouchers)
+        // createCard(vouchers)
+    })
+}
+
+// getting data from api---------------
+let getData = async(apiUrl) =>{
+
+    let res =  await fetch(apiUrl)
+    let data = await res.json();
+    appendData(data)
+}
+
+getData(apiUrl)
+
 
 
 
